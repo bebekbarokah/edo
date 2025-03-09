@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #820404;
+    color: white;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.logo {
+    width: 35%;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+.dropdown-button {
+    margin-top: 20px;
+    width: 350px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content button {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: black;
+}
+.dropdown-content button.active {
+    background-color: black;
+    color: white;
+}
+
+.show {
+    display: block;
+}
+
+.resto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 20px;
+    background: #820404;
+    font-size: 14px;
+    color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.resto img {
+    width: 30px;
+}
+
+.resto p {
+    margin-top: 5px;
+}
+
+.food {
+    width: 45%;
+    margin-left: 10px;
+    border-bottom: 3px solid #820404;
+    padding-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.menu-title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #820404;
+}
+
+/* Kontainer Menu */
+.menu {
+    margin: 0 auto;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+}
+
+.menu h2 {
+    font-size: 16px;
+}
+
+/* Setiap Item Menu */
+.menu-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+/* Gambar Menu */
+.menu-img {
+    width: 100%; /* Ukuran 1:1 */
+    object-fit: cover; /* Pastikan gambar tetap proporsional */
+    border-radius: 8px; /* Agar terlihat lebih modern */
+}
+
+/* Info Menu (Nama & Harga) */
+.menu-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.menu-info h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.menu-info p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.add {
+    width: 90%;
+    background-color: #820404;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+/* Tombol Aksi */
+.menu-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.menu-actions button {
+    background: #820404;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu-actions button:hover {
+    background: #e65c00;
+}
+
+.cartnum {
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    display: block;
+    margin: 10px 0;
+}
+
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.quantity button {
+    background: #ccc;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.quantity span {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+button {
+    background: #25D366;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Popup Gambar */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    padding-top: 50px;
+}
+
+.popup-content {
+    max-width: 80%;
+    max-height: 80vh;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Overlay Latar Belakang */
+#cart-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+/* Modal Keranjang */
+#cart-modal {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 50vh;
+    background: white;
+    box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px 12px 0 0;
+    z-index: 999;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cart-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cart-form input,
+.cart-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cart-form textarea {
+    height: 60px;
+}
+
+
+/* Tombol Close (X) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ff0000;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #cc0000;
+}
+
+
+/* Tombol Keranjang Melayang */
+#cart-button {
+    width: 90%;
+    position: fixed;
+    bottom: 0px;
+    margin: 20px;
+    background: #820404;
+    color: white;
+    border: 1px solid #f5f5f5;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#cart-button button {
+    background-color: #ffffff;
+    color: #820404;
+    padding: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 0px 10px 10px 0;
+}
+
+#total-price-button {
+    padding: 20px;
+}
+
+
+/* Animasi Sliding */
+#cart-modal.active {
+    transform: translateY(0%);
+}
+
+/* Konten Keranjang */
+.cart-content {
+    overflow-y: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-content h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #820404;
+}
+
+/* Tombol Tutup (X) */
+.close-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    transition: 0.3s;
+    background: #cc0000;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    color: #cc0000;
+}
+
+/* List Item di Keranjang */
+#cart-items {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#cart-items li {
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+/* Tombol Hapus */
+#cart-items button {
+    background: #820404;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#cart-items button:hover {
+    background: #cc0000;
+}
+
+/* Tombol Checkout */
+.checkout-btn {
+    background: #820404;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.checkout-btn:hover {
+    background: #218838;
+}
+
+/* Footer */
+footer {
+    background: #820404;
+    color: white;
+    text-align: center;
+    padding: 20px 15px 100px 15px;
+    margin-top: 20px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-item a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.footer-item a:hover {
+    color: #ffcc00;
+}
